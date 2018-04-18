@@ -1,0 +1,27 @@
+
+103.229.28.233 
+用户名：administrator/root(ssh2)
+
+
+1.login cookies
+2.token 生成
+3.密码md5加密
+
+{"dev_id":"bcg57ef6bfe6365e","dev_cmd":"1","dev_type":"1","dev_stat":"1"}
+{"dev_id":"bcg57ef6bfe6365e","cmd":"1","type":"1","stat":"1"}
+
+
+
+
+
+
+地址:103.229.28.233 
+用户名：root
+密码：5u7s7e9m2o
+
+
+
+root:bcg12345:3396
+bcg:bcg12345:3396
+http://code.taobao.org/svn/web_bcg
+

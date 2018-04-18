@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+		<script type="text/javascript" src="../easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+<title>注册</title>
+</head>
+<style>
+.loginf{
+
+	//border: solid 1px red;
+	width: 30%;
+	margin-left: 35%;		
+	margin-top: 30px;	
+
+	text-align: center;
+}
+.loginf table{
+	
+	border-collapse:collapse;
+	//border: solid 1px black;
+	margin: 0 auto;
+}
+.loginf table,td{
+	
+font-size: 18px;
+}
+.loginfo table,tr{
+	
+	text-align: left;
+	//border: solid 1px black;
+
+}
+.loginfo table,tr input{
+	height:20px;
+//	margin-top: 10px;
+
+}
+.loginfo table,tr a{	
+	margin-top: 10px;
+}
+.yin{ width:100%; background:#000; 
+position:absolute; left:0;
+right:0; top:0; bottom:0; -moz-opacity:0.5;
+opacity:0.3;
+filter:alpha(opacity=20);z-index:99; height:100%; }
+</style>
+<script language="javascript" type="text/javascript" src="../jquery-1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+function pageDivLock(){
+	 document.body.style.height=document.documentElement.clientHeight+'px';
+	 document.getElementById('yin').className='yin';
+	 document.getElementById('yin').style.display='';
+	 document.getElementById('yin').style.height=document.body.scrollHeight+'px';
+	}
+function pageDivLockClose(){
+ document.getElementById('yin').className='';
+ document.getElementById('yin').style.display='none';
+}
+
+var  $username_ok = 0;
+var  last_username="";
+function  check_user(usn)
+{
+	//console.log("ddddd-"+usn);
+	if(usn != last_username)
+	{
+		last_username = usn;
+	}
+	else
+	{
+		return;
+	}
+	pageDivLock();
+	$.ajax(
+			{	type:"post",
+				url:"checkusername.php",
+				data:{"username":last_username},
+				success:function(data){	
+							
+					if(data.trim().indexOf("1") >=0) 
+					{
+						$("#_easyui_textbox_input1").css({"background-color":"red"});
+						alert("此用户名已经注册!");
+						$username_ok = 0;
+					}
+					else
+					{
+						
+						$username_ok = 1;
+					}
+					pageDivLockClose();
+				}
+			}
+	);
+}
+
+$(function(){
+	
+//	$("#username").blur(function(){
+	$("#_easyui_textbox_input1").blur(function(){
+		//check username
+		if ($("#username").val().trim() != 0) {
+				
+			check_user($("#username").val().trim());
+		}
+		
+	});
+	$("#_easyui_textbox_input1").focus(function(){
+		
+		$("#_easyui_textbox_input1").css({"background-color":"white"});
+		
+	});
+	//注册
+	$("#btn_reg").click(function(){
+		//alert("用户名不能空ddddddd!"+$("#username").val().trim());
+	
+			if ($("#username").val().trim() == 0) {
+				alert("用户名不能空!");
+				return;
+			}
+			if ($username_ok == 0) {
+
+				alert("用户名存在!");
+				return;
+			}
+
+			if ($("#password").val().trim() != $("#repassword").val().trim()) {
+
+				alert("密码两次不同!");
+				return;
+			}
+
+			$.ajax({
+				type : "post",
+				url : "regist.php",
+				data : {
+					"username" : $("#username").val().trim(),
+					"password" : $("#password").val().trim(),
+					"repassword" : $("#repassword").val().trim(),
+					"email" : $("#email").val().trim(),
+					"qqnum" : $("#qqnum").val().trim(),
+					"phonenum" : $("#phonenum").val().trim()
+				},
+				success : function(data) {
+
+					if (data.trim().indexOf("registok") >= 0) {
+						alert("注册成功!");
+					}
+				}
+			});
+
+		});
+
+	})
+</script>
+<body style="background-color: #F0F0F0">
+<!-- 全屏遮罩div,检查用户名是否存在 -->
+<div id="yin"></div>
+<div id="register" style="border: solid 0px red; height: 500px; width: 26%; margin-left: 37%;
+	 margin-top: 50px; text-align: center;">
+		
+	 	<p style="width:100%; height: 30px;line-height: 30px;background-color: rgb(17,57,101);
+color: #fff;text-align: center;	margin-top:0px;margin-bottom:0px;border:solid rgb(17,57,101) 1px;">注册</p> 
+
+	<div style="border:solid rgb(17,57,101) 1px; width:100%; height:450px;">
+	
+				<div style="margin-bottom: 20px;margin-top: 30px;">
+					<input class="easyui-textbox" data-options="prompt:'用户名'"
+						style="width: 80%; height: 32px" 
+						id="username" name="username" 
+						type="text">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 80%; height: 32px" id="password" name="password"
+						type="password" data-options="prompt:'密码'">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 80%; height: 32px" id="repassword"
+						name="repassword" type="password" data-options="prompt:'重复密码'">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 80%; height: 32px"
+						data-options="prompt:'Enter a email address...',validType:'email'"
+						id="email" name="email">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 80%; height: 32px" id="qqnum" name="qqnum"
+						data-options="prompt:'qq'">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 80%; height: 32px" id="phonenum" name="phonenum"
+						data-options="prompt:'手机'"
+						>
+				</div>
+				<div>
+					<button class="easyui-linkbutton" id="btn_reg" type="submit"
+						style="width: 80%; height: 32px; margin-top: 5px;  font-size: 15px;">注册</button>
+					
+				</div>
+				<a href="../main/mainindex.php" class="easyui-linkbutton" iconCls="icon-ok"
+				 style="width:80%;height:32px;margin-top: 10px;"
+					
+				>去登陆</a>
+	
+	
+	</div>
+</div>
+	
+	
+	
+
+<!--  <p align="center" style="font-size: 20px;margin-top: 50px;
+ background-color: rgb(17,57,101);color:#fff;
+ width: 60%;margin-left: 20%;">
+账号注册
+</p>  -->
+
+	<div class="loginf">
+		<!-- <form action="mysql.php" method="post" style="margin-left: 20%"> -->
+		<!-- <table>
+	<tr>
+		<td><a>用户名:</a></td>
+		<td><input id="username" name="username"  type="text" value="123456" /></td>
+	</tr>
+	<tr>
+	<tr>
+		<td><a>密码:</a></td>
+		<td><input id="password" name="password"  type="password" value="123456"/></td>
+	</tr>
+	<tr>
+		<td><a>重复密码:</a></td>
+		<td><input id="repassword" name="repassword"  type="password" value="123456"/></td>
+	</tr>
+	<tr>
+		<td><a>email:</a></td>
+		<td><input id="email" name="email"  type="text" value="123456@qq.com"/></td>
+	</tr>
+	<tr>
+		<td><a>QQ:</a></td>
+		<td><input id="qqnum" name="qqnum"  type="text" value="123456"/></td>
+	</tr>
+	<tr>
+		<td><a>手机:</a></td>
+		<td><input id="phonenum" name="phonenum"  type="text" value="123456"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align: center;">
+			<button id="btn_reg" type="submit" style="margin-top: 5px;width: 90px;font-size: 15px;">注册</button>
+		</td>
+	</tr>
+	</table>	 -->
+		<!-- </form> -->
+		
+			<!-- <div class="easyui-panel" title="注册"
+				style="width: 100%; max-width: 400px; padding: 30px 60px;">
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox" data-options="prompt:'用户名'"
+						style="width: 100%; height: 32px" 
+						id="username" name="username" 
+						type="text">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 100%; height: 32px" id="password" name="password"
+						type="password" data-options="prompt:'密码'">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 100%; height: 32px" id="repassword"
+						name="repassword" type="password" data-options="prompt:'重复密码'">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 100%; height: 32px"
+						data-options="prompt:'Enter a email address...',validType:'email'"
+						id="email" name="email">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 100%; height: 32px" id="qqnum" name="qqnum"
+						data-options="prompt:'qq'">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input class="easyui-textbox"  labelPosition="top"
+						style="width: 100%; height: 32px" id="phonenum" name="phonenum"
+						data-options="prompt:'手机'"
+						>
+				</div>
+				<div>
+					<button class="easyui-linkbutton" id="btn_reg" type="submit"
+						style="width: 100%; height: 32px; margin-top: 5px;  font-size: 15px;">注册</button>
+					
+				</div>
+				<a href="../main/mainindex.php" class="easyui-linkbutton" iconCls="icon-ok"
+				 style="width:100%;height:32px;margin-top: 10px;"
+					
+				>去登陆</a>
+			</div>
+			 -->
+
+			
+	</div>
+
+</body>
+</html>

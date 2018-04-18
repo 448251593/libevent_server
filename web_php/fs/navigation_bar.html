@@ -1,0 +1,69 @@
+
+<link href="/web_bcg/fs/css/style.css" rel="stylesheet">
+
+<div class="htmleaf-container" style="margin-left:5%;width:90%;margin-top: 80px;">
+	<nav class="animenu"> 
+	  <button class="animenu__toggle">
+		<span class="animenu__toggle__bar"></span>
+		<span class="animenu__toggle__bar"></span>
+		<span class="animenu__toggle__bar"></span>
+	  </button>
+	  <ul class="animenu__nav">
+		<li>
+		  <a href="#">主页</a>
+		</li>
+		<li>
+		  <a href="#">设备</a>
+		  <ul class="animenu__nav__child">
+			<li><a href="">我的设备</a></li>
+			<li><a href="">生成ID</a></li>
+			<li><a href="">绑定ID</a></li>
+		  </ul>
+		</li>     
+		<li>
+		  <a href="#">个人中心</a>
+		  <ul class="animenu__nav__child">
+			
+			<li><a href="">个人资料</a></li>
+			<li><a href="">密码修改</a></li>
+		  </ul>
+		</li>
+		<li>
+		  <a href="#">关于</a>
+		</li>
+		               
+	  </ul>
+	</nav>
+</div>
+
+<script type="text/javascript">
+	(function(){
+	  var animenuToggle = document.querySelector('.animenu__toggle'),
+		  animenuNav    = document.querySelector('.animenu__nav'),
+		  hasClass = function( elem, className ) {
+			return new RegExp( ' ' + className + ' ' ).test( ' ' + elem.className + ' ' );
+		  },
+		  toggleClass = function( elem, className ) {
+			var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ' ) + ' ';
+			if( hasClass(elem, className ) ) {
+			  while( newClass.indexOf( ' ' + className + ' ' ) >= 0 ) {
+				newClass = newClass.replace( ' ' + className + ' ' , ' ' );
+			  }
+			  elem.className = newClass.replace( /^\s+|\s+$/g, '' );
+			} else {
+			  elem.className += ' ' + className;
+			}
+		  },           
+		  animenuToggleNav =  function (){        
+			toggleClass(animenuToggle, "animenu__toggle--active");
+			toggleClass(animenuNav, "animenu__nav--open");        
+		  }
+
+	  if (!animenuToggle.addEventListener) {
+		  animenuToggle.attachEvent("onclick", animenuToggleNav);
+	  }
+	  else {
+		  animenuToggle.addEventListener('click', animenuToggleNav);
+	  }
+	})()
+</script>

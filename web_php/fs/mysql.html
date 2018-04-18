@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+.loginf{
+
+	//border: solid 1px red;
+	width: 30%;
+	margin-left: 35%;		
+	margin-top: 30px;	
+
+	text-align: center;
+}
+.loginf table{
+	
+	border-collapse:collapse;
+	//border: solid 1px black;
+}
+.loginf table,td{
+	
+font-size: 18px;
+}
+.loginfo table,tr{
+	
+	text-align: left;
+	//border: solid 1px black;
+
+}
+.loginfo table,tr input{
+	height:20px;
+//	margin-top: 10px;
+
+}
+.loginfo table,tr a{	
+	margin-top: 10px;
+}
+</style>
+<body style="background-color: #F0F0F0">
+
+<p align="center" style="font-size: 20px;margin-top: 50px;background-color: #33FF99;width: 60%;margin-left: 20%;">
+账号注册
+</p>
+
+<div class="loginf">
+<form action="mysql.php" method="post" style="margin-left: 20%">
+	<table>
+	<tr>
+		<td><a>用户名:</a></td>
+		<td><input id="username" name="username"  type="text" value="123456"/></td>
+	</tr>
+	<tr>
+	<tr>
+		<td><a>密码:</a></td>
+		<td><input id="password" name="password"  type="password" value="123456"/></td>
+	</tr>
+	<tr>
+		<td><a>重复密码:</a></td>
+		<td><input id="repassword" name="repassword"  type="password" value="123456"/></td>
+	</tr>
+	<tr>
+		<td><a>email:</a></td>
+		<td><input id="email" name="email"  type="text" value="123456@qq.com"/></td>
+	</tr>
+	<tr>
+		<td><a>QQ:</a></td>
+		<td><input id="qqnum" name="qqnum"  type="text" value="123456"/></td>
+	</tr>
+	<tr>
+		<td><a>手机:</a></td>
+		<td><input id="phonenum" name="phonenum"  type="text" value="123456"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align: center;">
+			<button type="submit" style="margin-top: 5px;width: 90px;font-size: 15px;">注册</button>
+		</td>
+	</tr>
+	</table>	
+</form>
+</div>
+
+</body>
+</html>
