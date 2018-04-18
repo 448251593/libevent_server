@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <string.h>
+
+#include <iostream>
+
+#include"sqlite3.h"
+
+using namespace std;
+
+
+
+Sql_Interface_class::Sql_Interface_class(char *p_sql_path_name)
+{
+    int  rc;
+    rc = sqlite3_open("zieckey.db", &db);
+    if( rc )
+    {
+        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));	  //sqlite3_close(db);	  exit(1);	 }	 else 	{		printf("You have opened a sqlite3 database named zieckey.db successfully!\nCongratulations! Have fun !  ^-^ \n");	}
+    }
+}
+    Sql_Interface_class::~Sql_Interface_class(char *p_sql_path_name)
+    {
+    }
+
+
+
+
+   
+

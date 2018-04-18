@@ -1,0 +1,249 @@
+﻿
+
+
+<body>
+
+
+<script>
+<!-- 注册设备id-->
+function register_device_id()
+{	
+	stringtmp = "注册成功!\r\n";
+	stringtmp += "设备id:"+"abcd\r\n";
+	stringtmp += "控制密码:"+"123456\r\n";
+	
+	
+	if(document.getElementById("register_device_id").value == "")
+	{
+		alert("设备id不能为空!!");
+		return;
+	}
+	if(document.getElementById("register_device_id_key1").value == "")
+	{
+		alert("密码不能空!!");
+		return;
+	}
+	if(document.getElementById("register_device_id_key2").value == "")
+	{
+		alert("重复密码不能为空!!");
+		return;
+	}	
+	
+	if(document.getElementById("register_device_id_key1").value != document.getElementById("register_device_id_key2").value)
+	{
+		alert("两次密码不一致");
+		return;
+	}
+	
+
+
+	stringaddr = 'register_devid.html?'+'dev_id='+document.getElementById("register_device_id").value+
+								'&ctrl_key='+document.getElementById("register_device_id_key1").value;
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+	
+
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			if(xmlhttp.responseText == "registidok")
+			{
+				alert("注册成功!");
+			}
+			else if(xmlhttp.responseText == "registidfailed_same")
+			{
+				alert("注册失败,相同的设备id");
+			}
+			else if(xmlhttp.responseText == "registidfailed")
+			{
+				alert("注册失败!");
+			}
+			
+			else if(xmlhttp.responseText == "registidfailedtry")
+			{
+				alert("注册失败,请重试!");
+			}
+			
+		//	document.getElementById("contextid").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.send();
+}
+
+function show_dev_register()
+{	
+	stringaddr ="<div align='center'>";
+	stringaddr += "&nbsp;设&nbsp备&nbsp;id:&nbsp;<input id='register_device_id' type=\"text\" > </input>	<br>	&nbsp;密  &nbsp;&nbsp; 码:&nbsp;<input id='register_device_id_key1' type=\"text\" > </input> <br>	&nbsp;重复密码:&nbsp;<input id='register_device_id_key2' type=\"text\" > </input>";
+	stringaddr +="<br><button onclick=\"register_device_id()\">注&nbsp;&nbsp; 册</button>";
+	stringaddr += "<p> 为了设计简单,同时有权限控制简单,所以增加了设备的密码,用于控制设备的.一定要记住!!</p>"
+	stringaddr +="</div >";
+	
+	document.getElementById("contextid").innerHTML=stringaddr;	
+}
+
+function show_index()
+{
+	stringaddr_index ="&nbsp; &nbsp;欢迎来到物联网DIY平台!通过注册一个设备ID和控制密码.然后就可以通过web控制设备.选择左侧对应的菜单进入对应的目录!";	
+
+	document.getElementById("contextid").innerHTML=stringaddr_index;	
+}
+
+function show_login()
+{
+
+	stringaddr ="<div align='center'>";
+	stringaddr += "&nbsp;用&nbsp;户&nbsp;名:&nbsp;<input type=\"text\" > </input>	<br>	&nbsp;密  &nbsp;&nbsp; 码:&nbsp;<input type=\"text\" > ";
+	stringaddr +="<br><button onclick=\"register_username()\">登   录</button>";
+	stringaddr +="</div >";
+	document.getElementById("contextid").innerHTML="/index.html";	
+}
+
+function show_login()
+{
+	stringaddr ="<div align='center'>";
+	stringaddr += "&nbsp;用&nbsp;户&nbsp;名:&nbsp;<input type=\"text\" > </input>	<br>	&nbsp;密  &nbsp;&nbsp; 码:&nbsp;<input type=\"text\" > ";
+	stringaddr +="<br><button onclick=\"register_username()\">登   录</button>";
+	stringaddr +="</div >";
+	document.getElementById("contextid").innerHTML="index.html";	
+}
+//显示控制面板
+function show_ctrl_dev()
+{													
+	stringaddr = "get_ctrl_dev.html";
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("contextid").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.send();
+}
+//控制设备命令网址
+function ctrl_dev()
+{	
+	if(document.getElementById("deviceid").value == "")
+	{
+		alert("设备id不能为空!!");
+		return;
+	}	
+	
+    if(document.getElementById("deviceid_key").value == "")
+	{
+		alert("设备id_key不能为空!!");
+		return;
+	}
+	
+	stringaddr = 'ctrl_dev.html?'+'dev_id='+document.getElementById("deviceid").value+
+								'&switch_no='+document.getElementById("switch_no").value+
+								'&on_off='+document.getElementById("cmd").value+
+								'&ctrl_key='+document.getElementById("deviceid_key").value
+								
+	
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("newstatus").innerHTML="result:"+xmlhttp.responseText;
+		}
+	}
+	xmlhttp.send();
+}
+
+//获取服务器运行状态网址
+
+function get_server_run_status()
+{													
+	stringaddr = "run_status.json"
+	
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("newstatus").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.send();
+}
+//显示设备信息网址
+function show_dev_info()
+{
+	stringaddr = 'run_status.json?dev_id='+document.getElementById("deviceid").value
+	
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+			
+	//window.location.href='run_status.json?dev_id='+document.getElementById("deviceid").value
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("newstatus").innerHTML="status:"+xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.send();
+}
+
+</script>
+
+
+
+<div id="indexid" style='position:fixed;width:60%;height:10%;border: 1px solid #000;top:0%; left:20%;display: table'>
+
+<p align='center' style=';font-size:20px;top:10px'>欢迎来到物联网DIY平台!!</p>
+<marquee style='top:50%;'>基于libevent的web和服务,物联网数据转发DIY平台!!作者:毕工 QQ:448251593 QQ群:423982829</marquee>
+
+</div>
+<div id="indexid" style='position:fixed;width:10%;height:60%;border: 1px solid #000;top:11%; left:20%;display: table'>
+<ul style='cursor: hand; color:blue'>
+	<li onclick="show_index()">主页</li>
+	<li onclick="show_dev_register()">注册设备ID:</li>			
+
+	
+	
+	<li>协议接口</li>
+	<li>帮助文档</li>
+	<li onclick='show_ctrl_dev()'>控制面板</li>
+	</ul>
+
+</div>
+	
+
+
+
+
+
+<div id="contextid" style='position:fixed;width:50%;height:60%;border: 1px solid #000;top:11%; left:30%;display: table'>
+
+<script>show_index()	</script>
+</div>
+
+
+
+
+<div id="newstatus" align="center"></div>
+
+<div id="ad1" style='position:fixed;width:40%;height:80px;border: 1px solid #000;bottom:0; left:30%;display: table'>
+		
+<a	style='display:table-cell;vertical-align:middle;text-align:center;color: blue; font-weight:bold;font-size: 20px;' href='http://www.dwz.cn/ez8Zq' target="blank">
+	点击广告5-8分钱一个.3毛提现!
+</a>
+
+</div>
+</body>
+
+</html>

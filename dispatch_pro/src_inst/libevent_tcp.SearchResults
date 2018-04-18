@@ -1,0 +1,16 @@
+---- Map_Dev_onln Matches (15 in 2 files) ----
+Http_server.cpp (e:\linux_share\linux_libevent\test_libevet\src):	Map_Data_Dev.Map_Dev_onln.size();
+Http_server.cpp (e:\linux_share\linux_libevent\test_libevet\src):	cJSON_AddNumberToObject(pRoot, "connected device",Map_Data_Dev.Map_Dev_onln.size());
+Http_server.cpp (e:\linux_share\linux_libevent\test_libevet\src):					m1_iter = Map_Data_Dev.Map_Dev_onln.find(device_id_tmp);			
+Http_server.cpp (e:\linux_share\linux_libevent\test_libevet\src):					if(m1_iter != Map_Data_Dev.Map_Dev_onln.end()) 
+Http_server.cpp (e:\linux_share\linux_libevent\test_libevet\src):							Map_Data_Dev.Map_Dev_onln.erase(m1_iter);
+Http_server.cpp (e:\linux_share\linux_libevent\test_libevet\src):				m1_iter = Map_Data_Dev.Map_Dev_onln.find(device_id_tmp);			
+Http_server.cpp (e:\linux_share\linux_libevent\test_libevet\src):				if(m1_iter != Map_Data_Dev.Map_Dev_onln.end()) 
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src):					Map_Data_Dev.Map_Dev_onln.insert(
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src):							Map_Data_Dev.Map_Dev_onln.insert(
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src):		m1_iter = Map_Data_Dev.Map_Dev_onln.find(did_str);
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src):		if(m1_iter != Map_Data_Dev.Map_Dev_onln.end())	//ÕÒµ½
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src):			Map_Data_Dev.Map_Dev_onln.at(did_str) = tmp_client;		
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src)://				Map_Data_Dev.Map_Dev_onln.insert(pair<string ,device_client*>(did_str, tmp_client));
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src):		m1_iter = Map_Data_Dev.Map_Dev_onln.find(did_str);
+Protocol_dev.cpp (e:\linux_share\linux_libevent\test_libevet\src):	if(m1_iter != Map_Data_Dev.Map_Dev_onln.end())	//ÕÒµ½

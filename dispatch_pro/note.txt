@@ -1,0 +1,4 @@
+
+{"dev_id":"12345","dev_cmd":"1","dev_type":"1","dev_stat":"1"}
+E:\linux_share\linux_libevent\test_libevet\exelibevent
+E:\workproject\linux_test\linux_libevent\test_libevet\exelibevent

@@ -1,0 +1,4 @@
+---- json_str_origin Matches (3 in 2 files) ----
+Client.cpp (e:\linux_share\linux_test\linux_libevent\libevent_bcg\test_libevet\src):			cJSON_AddStringToObject(pRoot, "origin_str",(char*)json_str_origin.c_str());
+Protocol_dev.cpp (e:\linux_share\linux_test\linux_libevent\libevent_bcg\test_libevet\src):			tmp_client->json_str_origin = msg;
+Protocol_dev.cpp (e:\linux_share\linux_test\linux_libevent\libevent_bcg\test_libevet\src):				tmp_client->json_str_origin = msg;

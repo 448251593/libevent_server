@@ -1,0 +1,139 @@
+﻿<html>
+<script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "//hm.baidu.com/hm.js?1de702cebda0538de6ce30fdef565927";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>
+<body>
+<H1 align="center">Welcome!</H1>
+<p align="center"><font color="red" >this sever is based libevent</font></p>
+
+<script>
+function get_server_run_status()
+{													
+	stringaddr = "run_status.json"
+	
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+	
+
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("newstatus").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.send();
+}
+function ctrl_dev()
+{													
+	stringaddr = 'ctrl_dev.html?'+'dev_id='+document.getElementById("deviceid").value+
+								'&switch_no='+document.getElementById("switch_no").value+
+								'&on_off='+document.getElementById("cmd").value
+	
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+	
+
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("newstatus").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.send();
+}
+
+
+function show_dev_info()
+{
+	
+	stringaddr = 'run_status.json?dev_id='+document.getElementById("deviceid").value
+	
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",stringaddr, true);
+			
+	//window.location.href='run_status.json?dev_id='+document.getElementById("deviceid").value
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("newstatus").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.send();
+}
+
+</script>
+
+
+<table style='border: 1px solid #000;' align="center">	
+  <tr >
+	<td>
+	&nbsp;dev_id:&nbsp;&nbsp;<input value = "abcd" id="deviceid"></input>
+	<br>
+	<br>
+	
+	&nbsp;switch num:<select style='width: 100px;' id='switch_no'>
+		<option value='0'>0</option>
+		<option value='1'>1</option>
+		<option value='2'>2</option>
+		<option value='3'>3</option>
+		<option value='4'>4</option>
+		<option value='5'>5</option>
+		<option value='6'>6</option>
+		<option value='7'>7</option>
+		<option value='8'>8</option>
+		<option value='9'>9</option>
+		<option value='10'>10</option>
+		<option value='11'>11</option>
+		<option value='12'>12</option>
+		<option value='13'>13</option>
+		<option value='14'>14</option>
+		<option value='15'>15</option>
+		<option value='16'>16</option>
+		<option value='17'>17</option>
+		<option value='18'>18</option>
+		<option value='19'>19</option>
+		<option value='20'>20</option>
+		<option value='21'>21</option>
+		<option value='22'>22</option>
+		<option value='23'>23</option>
+		<option value='24'>24</option>
+		<option value='25'>25</option>
+		<option value='26'>26</option>
+		<option value='27'>27</option>
+		<option value='28'>28</option>
+		<option value='29'>29</option>
+	</select>
+	&nbsp;		
+	on_off:<select style='width: 100px;' id='cmd'>
+		<option value='0'>off</option>
+		<option value='1'>on</option>
+	</select>
+	<br>
+	<br>
+	<p align="center">
+	<button onclick="ctrl_dev()" >&nbsp; send cmd &nbsp;</button>	
+	&nbsp;
+	<button onclick="show_dev_info()">device status </button>	
+	
+	&nbsp;
+	<button onclick="get_server_run_status()">server status </button>	
+	</p>
+	</td>
+
+  </tr>
+</table>
+<div id="newstatus" align="center"></div>
+
+<div id="ad1" style='position:fixed;width:40%;height:80px;border: 1px solid #000;bottom:0; left:30%;display: table'>
+		
+<a	style='display:table-cell;vertical-align:middle;text-align:center;color: blue; font-weight:bold;font-size: 22px;' href='http://www.dwz.cn/ez8Zq'>
+	点击广告5-8分钱一个
+</a>
+
+</div>
+</body>
+</html>
